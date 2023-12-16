@@ -1,0 +1,33 @@
+﻿@page "/Department/Create"
+@inject IService<Department> DeptService
+<h3>NewDepartment</h3>
+
+@if (department != null)
+{
+	<EditForm Model="department" OnValidSubmit="Save">
+		<DataAnnotationsValidator></DataAnnotationsValidator>
+		<ValidationSummary></ValidationSummary>
+		<div class="mt-2">
+			<label>Name</label>
+			<InputText @bind-Value="department.Name" class="form-control"></InputText>
+			<ValidationMessage For="()=>department.Name"></ValidationMessage>
+		</div>
+		<input type="submit" value="Add" class="btn btn-success mt-4" />
+	</EditForm>
+
+}
+
+@code {
+
+	public Department department { get; set; } = new Department();
+
+	[Inject]
+	public NavigationManager NavManager { get; set; }
+
+
+	public async void Save()
+	{
+		await DeptService.Insert(department);
+		NavManager.NavigateTo("/Departments");
+	}
+}

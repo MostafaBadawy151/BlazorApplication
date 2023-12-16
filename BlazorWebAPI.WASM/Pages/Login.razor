@@ -1,0 +1,39 @@
+﻿@page "/login"
+<h3>Login</h3>
+
+<EditForm Model="@loginModel" OnValidSubmit="LoginUser">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div>
+        <label for="email">Email:</label>
+        <InputText id="email" @bind-Value="loginModel.Email" />
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <InputText id="password" type="password" @bind-Value="loginModel.Password" />
+    </div>
+
+    <button type="submit">Login</button>
+</EditForm>
+
+@code {
+    public LoginModel loginModel = new LoginModel();
+    public NavigationManager NavManager { get; set; }
+    private async Task LoginUser()
+    {
+        //var result = await authService.LoginAsync(loginModel);
+
+        //if (result.Succeeded)
+        //{
+        //    //Redirect to a protected page or another page after successful login
+        //    NavManager.NavigateTo("/Employees");
+        //}
+        //else
+        //{
+        //    //Handle login failure (display errors, etc.)
+        //    //result.Errors; //contains the list of errors
+        //}
+    }
+
+}

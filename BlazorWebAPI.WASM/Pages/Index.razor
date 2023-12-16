@@ -1,0 +1,31 @@
+﻿@page "/"
+
+
+<div class="card mb-3">
+    <h5 class="card-header">Departments</h5>
+    <div class="card-body">
+        <h5 class="card-title">Our Departments</h5>
+        <p class="card-text">Check Our Departments with employees in each.</p>
+        <button class="btn btn-primary text-white cursor-pointer" @onclick="() => NavigateToDepartment()">Go TO Departments</button>
+    </div>
+</div>
+<div class="card">
+    <h5 class="card-header">Employess</h5>
+    <div class="card-body">
+        <h5 class="card-title">Our Employees</h5>
+        <p class="card-text">Check Our Employees.</p>
+        <button class="btn btn-primary text-white cursor-poniter" @onclick="() => NavigateToEmpoyess()">Go TO Employees</button>
+    </div>
+</div>
+@code {
+    [Inject]
+    public NavigationManager navigationManager { get; set; }
+    private void NavigateToDepartment()
+    {
+        navigationManager.NavigateTo($"/Departments");
+    }
+    private void NavigateToEmpoyess()
+    {
+        navigationManager.NavigateTo($"/Employees");
+    }
+}

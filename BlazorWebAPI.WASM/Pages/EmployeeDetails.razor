@@ -1,0 +1,47 @@
+﻿@page  "/Employee/Details/{id:int}"
+@inject IService<Employee> EmpService
+@inject IService<Department> DeptService
+
+
+<h3>EmployeeDetails</h3>
+@if(employee != null)
+{
+	<div>
+		<label>Name</label>
+		<input type="text" @bind="employee.Name" class="form-control" readonly></input>
+	</div>
+	<div>
+		<label>Salary</label>
+		<input type="number" @bind="employee.Salary" class="form-control" readonly></input>
+	</div>
+	<div>
+		<label>Department</label>
+		<input type="text" @bind="department.Name" class="form-control" readonly></input>
+	</div>
+}
+
+
+<button @onclick="() => NavigateToEmployeeEdit(employee.Id)" class="btn btn-warning mt-4">Edit</button>
+
+
+
+
+@code {
+	[Parameter]
+	public int Id { get; set; }
+	public Employee employee { get; set; }
+	public Department department { get; set; }
+	[Inject]
+	public NavigationManager NavManager { get; set; }
+	protected override async Task OnInitializedAsync()
+	{
+		employee = await EmpService.GetById(Id);
+		department = await DeptService.GetById(employee.DepartmentId);
+		await base.OnInitializedAsync();
+	}
+	private void NavigateToEmployeeEdit(int employeeId)
+	{
+		NavManager.NavigateTo($"/employee/Edit/{employeeId}");
+	}
+
+}

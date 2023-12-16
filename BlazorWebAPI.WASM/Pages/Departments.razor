@@ -1,0 +1,90 @@
+﻿@page "/Departments"
+@inject IService<Department> DeptService
+@inject IService<Employee> EmpService
+
+<h3>Departments</h3>
+@if(departments != null)
+{
+	<select class="form-control" @bind="DepartmentId">
+		<option selected value=0>------- Select Department ------- </option>
+
+		@foreach (var dept in departments)
+		{
+			<option value="@dept.Id">@dept.Name</option>
+		}
+	</select>
+	<input type="button" value="Get Employees" class="btn btn-primary mt-5 mb-3" @onclick="GetStudents" />
+	@if (employeesWithDept != null)
+	{
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<tr>
+
+						<th scope="col">Name</th>
+						<th scope="col">Salary</th>
+					</tr>
+
+				</thead>
+				<tbody>
+					@foreach (var item in employeesWithDept)
+					{
+						<tr>
+							<th scope="col">@item.Name</th>
+							<th scope="col">@item.Salary</th>
+							<td>
+								<button @onclick="() => NavigateToEmployeeEdit(item.Id)" class="btn btn-warning">Edit</button>
+							</td>
+							<td>
+								<button @onclick="() => DeleteEmployee(item.Id)" class="btn btn-danger">Delete</button>
+							</td>
+						</tr>
+					}
+
+				</tbody>
+			</table>
+		</div>
+
+	}
+	else
+	{
+		<div class="alert alert-warning">Select Department To Display Employees</div>
+	}
+}
+
+<button @onclick="() => NavigateToDepartmentAdd()" class="btn btn-success mt-4">Add New Department</button>
+
+
+@code {
+	public List<Department> departments { get; set; }  
+	public List<Employee> employees { get; set; }
+	public List<Employee> employeesWithDept { get; set; }
+	[Inject]
+	NavigationManager NavManager { get; set; }
+
+
+	public int DepartmentId { get; set; }
+
+	protected override async Task OnInitializedAsync()
+	{
+		departments = await DeptService.GetAll();
+		employees = await EmpService.GetAll();
+	}
+	public  void GetStudents()
+	{
+		employeesWithDept =   employees.Where(e => e.DepartmentId == DepartmentId).ToList();
+	}
+	private void NavigateToDepartmentAdd()
+	{
+		NavManager.NavigateTo($"/Department/Create");
+	}
+	private void NavigateToEmployeeEdit(int employeeId)
+	{
+		NavManager.NavigateTo($"/employee/Edit/{employeeId}");
+	}
+	public void DeleteEmployee(int employeeId)
+	{
+		NavManager.NavigateTo($"/ConfirmDelete/{employeeId}");
+
+	}
+}

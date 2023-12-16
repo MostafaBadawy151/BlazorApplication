@@ -1,0 +1,15 @@
+G:\Blazor\BlazorWebAPI Solution\SharedData\bin\Debug\net5.0\SharedData.deps.json
+G:\Blazor\BlazorWebAPI Solution\SharedData\bin\Debug\net5.0\SharedData.dll
+G:\Blazor\BlazorWebAPI Solution\SharedData\bin\Debug\net5.0\SharedData.pdb
+G:\Blazor\BlazorWebAPI Solution\SharedData\obj\Debug\net5.0\SharedData.csproj.AssemblyReference.cache
+G:\Blazor\BlazorWebAPI Solution\SharedData\obj\Debug\net5.0\SharedData.GeneratedMSBuildEditorConfig.editorconfig
+G:\Blazor\BlazorWebAPI Solution\SharedData\obj\Debug\net5.0\SharedData.AssemblyInfoInputs.cache
+G:\Blazor\BlazorWebAPI Solution\SharedData\obj\Debug\net5.0\SharedData.AssemblyInfo.cs
+G:\Blazor\BlazorWebAPI Solution\SharedData\obj\Debug\net5.0\SharedData.csproj.CoreCompileInputs.cache
+G:\Blazor\BlazorWebAPI Solution\SharedData\obj\Debug\net5.0\SharedData.dll
+G:\Blazor\BlazorWebAPI Solution\SharedData\obj\Debug\net5.0\refint\SharedData.dll
+G:\Blazor\BlazorWebAPI Solution\SharedData\obj\Debug\net5.0\SharedData.pdb
+G:\Blazor\BlazorWebAPI Solution\SharedData\obj\Debug\net5.0\ref\SharedData.dll
+G:\Blazor\BlazorWebAPI Solution\SharedData\bin\Debug\net5.0\SharedData.runtimeconfig.json
+G:\Blazor\BlazorWebAPI Solution\SharedData\bin\Debug\net5.0\SharedData.runtimeconfig.dev.json
+G:\Blazor\BlazorWebAPI Solution\SharedData\obj\Debug\net5.0\SharedData.genruntimeconfig.cache

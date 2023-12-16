@@ -1,0 +1,58 @@
+﻿@page "/NewEmployee"
+@inject IService<Employee> EmpService
+@inject IService<Department> DeptService
+
+<h3>NewEmployee</h3>
+@if(employee != null && DeptList !=null)
+{
+	<EditForm Model="employee" OnValidSubmit="Save">
+		<DataAnnotationsValidator></DataAnnotationsValidator>
+		<ValidationSummary></ValidationSummary>
+		<div class="mt-2">
+			<label>Name</label>
+			<InputText @bind-Value="employee.Name" class="form-control"></InputText>
+			<ValidationMessage For="()=>employee.Name"></ValidationMessage>
+		</div>
+		<div class="mt-2">
+			<label>Salary</label>
+			<InputNumber @bind-Value="employee.Salary" class="form-control"></InputNumber>
+			<ValidationMessage For="()=>employee.Salary"></ValidationMessage>
+		</div>
+
+		<div class="mt-2">
+			<label>Department</label>
+			<InputSelect @bind-Value="employee.DepartmentId" class="form-control">
+				@foreach (var item in DeptList)
+				{
+					<option value="@item.Id">@item.Name</option>
+				}
+			</InputSelect>
+			<ValidationMessage For="()=>employee.DepartmentId"></ValidationMessage>
+
+		</div>
+		<input type="submit" value="Add" class="btn btn-success mt-4" />
+	</EditForm>
+
+}
+
+@code {
+
+	public Employee employee { get; set; } = new Employee();
+	public List<Department> DeptList { get; set; }
+
+	[Inject]
+	public NavigationManager NavManager { get; set; }
+	protected override async Task OnInitializedAsync()
+	{
+		DeptList = await DeptService.GetAll();
+		await base.OnInitializedAsync();
+	}
+
+	public async void Save()
+	{
+		await EmpService.Insert(employee);
+		DeptList = await DeptService.GetAll();
+
+		NavManager.NavigateTo("/Employees");
+	}
+}
